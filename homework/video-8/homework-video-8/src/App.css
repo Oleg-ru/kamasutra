@@ -1,0 +1,38 @@
+.task-self-container {
+  border: 5px solid darkmagenta;
+  border-radius: 6px;
+  width: 100%;
+  padding: 1rem;
+  margin: 5px;
+}
+
+.main-container-tasks {
+  width: 20vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.task-main-title, .task-status, .task-title-date {
+  font-weight: bold;
+  margin-right: 3px;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.low-priority {
+  background-color: #ffffff;
+}
+.medium-priority {
+  background-color: #ffd7b5;
+}
+.high-priority {
+  background-color: #ffb38a;
+}
+.urgent-priority {
+  background-color: #ff9248;
+}
+.highest-priority {
+  background-color: #ff6700;
+}
