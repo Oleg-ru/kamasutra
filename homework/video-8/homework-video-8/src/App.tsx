@@ -1,4 +1,5 @@
 import './App.css'
+import {useState} from "react";
 
 const tasks = [
     {
@@ -40,6 +41,8 @@ const tasks = [
 
 function App() {
 
+    const [selectedTaskId, setSelectedTaskId] = useState(null);
+
     if (tasks === null) {
         return <h2>Загрузка...📡</h2>
     }
@@ -50,6 +53,9 @@ function App() {
 
   return (
       <div className='main-container-tasks'>
+          <button className='reset-btn' onClick={ () => {
+              setSelectedTaskId(null);
+          } }>Сбросить выделение</button>
           {
               tasks.map(task => {
                   function getPriorityClass(priority: number) {
@@ -63,10 +69,14 @@ function App() {
                       }
                   }
                   const classTitle = `task-title ${task.isDone ? 'line-through' : ''}`;
-                  const backgroundTask = `task-self-container ${getPriorityClass(task.priority)}`;
+                  const backgroundTask =
+                      `task-self-container ${getPriorityClass(task.priority)} ${selectedTaskId === task.id ? 'border-blue' : ''}`;
 
                   return (
-                      <div key={task.id} className={backgroundTask}>
+                      <div key={task.id} className={backgroundTask} onClick={ () => {
+                          //alert(task.id) // задание 1
+                          setSelectedTaskId(task.id); //задание 2
+                      } }>
                           <span className='task-main-title'>Заголовок:</span>
                           <span className={classTitle}>{task.title}</span>
                           <br/>

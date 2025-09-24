@@ -36,3 +36,22 @@
 .highest-priority {
   background-color: #ff6700;
 }
+
+.border-blue {
+  border: 5px solid blue;
+}
+
+.reset-btn {
+  background-color: rgba(220, 20, 60, 0.6);
+  border-radius: 5px;
+  color: white;
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  transition: color 0.7s ease, background-color 0.8s ease-in-out;
+  cursor: pointer;
+}
+
+.reset-btn:hover {
+  background-color: white;
+  color: rgba(220, 20, 60, 0.6);
+}
