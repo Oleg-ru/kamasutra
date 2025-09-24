@@ -1,13 +1,16 @@
 // const tracks = null;
 
+import {useState} from "react";
+
 const tracks = [
     {id: 1, title: 'Soundtrack 1 js', url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3'},
     {id: 2, isSelected: true, title: 'Soundtrack 2 js', url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3'},
 ];
 
-const selectedTrackId = 1;
-
 function App() {
+
+    const [selectedTrackId, setSelectedTrackId] = useState(null);
+
 
     if (tracks === null) {
         return <div>
@@ -27,12 +30,18 @@ function App() {
   return (
     <div>
         <h1>Musicfun</h1>
+        <button onClick={()=> setSelectedTrackId(null)}>Сбросить</button>
         <ul>
             {
                 tracks.map((track) => {
                     return (
                         <li key={track.id} style={ selectedTrackId == track.id ? {border: 'solid 1px gold'} : {}}>
-                            <div>{track.title}</div>
+
+                            <div onClick={ () => {
+                                setSelectedTrackId(track.id)
+                            }}>
+                                {track.title}
+                            </div>
                             <audio controls src={track.url}></audio>
                         </li>
                     )
