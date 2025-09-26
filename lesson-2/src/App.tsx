@@ -1,15 +1,21 @@
 // const tracks = null;
 
-import {useState} from "react";
-
-const tracks = [
-    {id: 1, title: 'Soundtrack 1 js', url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack.mp3'},
-    {id: 2, isSelected: true, title: 'Soundtrack 2 js', url: 'https://musicfun.it-incubator.app/api/samurai-way-soundtrack-instrumental.mp3'},
-];
+import {useEffect, useState} from "react";
 
 function App() {
 
     const [selectedTrackId, setSelectedTrackId] = useState(null);
+    const [tracks, setTracks] = useState(null);
+
+    useEffect(() => {
+        console.log('effect has bean');
+        fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks', {
+            headers: {
+                'api-key': 'he-he ^_^'
+            }
+        }).then(resp => resp.json()).then(data => setTracks(data.data));
+        setTracks([]);
+    }, [])
 
 
     if (tracks === null) {
@@ -40,9 +46,9 @@ function App() {
                             <div onClick={ () => {
                                 setSelectedTrackId(track.id)
                             }}>
-                                {track.title}
+                                {track.attributes.title}
                             </div>
-                            <audio controls src={track.url}></audio>
+                            <audio controls src={track.attributes.attachments[0].url}></audio>
                         </li>
                     )
                 })
