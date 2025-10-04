@@ -5,16 +5,16 @@ import {useEffect, useState} from "react";
 function App() {
 
     const [selectedTrackId, setSelectedTrackId] = useState(null);
+    const [selectedTrack, setSelectedTrack] = useState(null);
     const [tracks, setTracks] = useState(null);
 
     useEffect(() => {
         console.log('effect has bean');
         fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks', {
             headers: {
-                'api-key': 'he-he ^_^'
+                'api-key': ':-)'
             }
         }).then(resp => resp.json()).then(data => setTracks(data.data));
-        setTracks([]);
     }, [])
 
 
@@ -36,7 +36,14 @@ function App() {
   return (
     <div>
         <h1>Musicfun</h1>
-        <button onClick={()=> setSelectedTrackId(null)}>Сбросить</button>
+        <button onClick={()=> {
+            setSelectedTrackId(null);
+            setSelectedTrack(null);
+        }}>Сбросить</button>
+        <div style={{
+            display: 'flex',
+            gap: '45px'
+        }}>
         <ul>
             {
                 tracks.map((track) => {
@@ -44,7 +51,12 @@ function App() {
                         <li key={track.id} style={ selectedTrackId == track.id ? {border: 'solid 1px gold'} : {}}>
 
                             <div onClick={ () => {
-                                setSelectedTrackId(track.id)
+                                setSelectedTrackId(track.id);
+                                fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${track.id}`, {
+                                    headers: {
+                                        'api-key': ':-)'
+                                    }
+                                }).then(resp => resp.json()).then(json => setSelectedTrack(json.data));
                             }}>
                                 {track.attributes.title}
                             </div>
@@ -54,6 +66,25 @@ function App() {
                 })
             }
         </ul>
+            <div style={{
+                border: '2px solid green',
+                height: 'max-content',
+                padding: '0.5rem'
+            }}>
+                <h3>Details</h3>
+                {selectedTrack === null
+                    ? 'Track is not selected'
+                    : <div>
+                        <h4>{selectedTrack.attributes.title}</h4>
+                        <h5>Lyrics</h5>
+                        {selectedTrack === null || selectedTrack?.id != selectedTrackId
+                            ? <p>Loading... ⏳</p>
+                            : <p>{selectedTrack.attributes.lyrics ?? 'Not lyrics'}</p>}
+
+                    </div>
+                }
+            </div>
+        </div>
     </div>
   )
 }
