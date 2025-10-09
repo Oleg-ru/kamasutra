@@ -2,6 +2,8 @@
 
 import {useEffect, useState} from "react";
 
+const API_KEY = 'c89d38be-88e2-4b68-b674-fde1e910fcc3';
+
 function App() {
 
     const [selectedTrackId, setSelectedTrackId] = useState(null);
@@ -12,7 +14,7 @@ function App() {
         console.log('effect has bean');
         fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks', {
             headers: {
-                'api-key': ':-)'
+                'api-key': API_KEY
             }
         }).then(resp => resp.json()).then(data => setTracks(data.data));
     }, [])
@@ -54,7 +56,7 @@ function App() {
                                 setSelectedTrackId(track.id);
                                 fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${track.id}`, {
                                     headers: {
-                                        'api-key': ':-)'
+                                        'api-key': API_KEY
                                     }
                                 }).then(resp => resp.json()).then(json => setSelectedTrack(json.data));
                             }}>
@@ -71,10 +73,11 @@ function App() {
                 height: 'max-content',
                 padding: '0.5rem'
             }}>
-                <h3>Details</h3>
-                {selectedTrack === null
-                    ? 'Track is not selected'
-                    : <div>
+                <h2>Details</h2>
+                {!selectedTrack && !selectedTrackId && 'Track is not selected'}
+                {!selectedTrack && selectedTrackId && 'Loading...🏀'}
+                {selectedTrack && selectedTrackId && selectedTrack.id !== selectedTrackId && 'Loading...⚽'}
+                {selectedTrack && <div>
                         <h4>{selectedTrack.attributes.title}</h4>
                         <h5>Lyrics</h5>
                         {selectedTrack === null || selectedTrack?.id != selectedTrackId
