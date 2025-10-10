@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 
-const API_KEY = 'c89d38be-88e2-4b68-b674-fde1e910fcc3';
+const API_KEY = 'NaN';
 
 function App() {
 
@@ -18,6 +18,17 @@ function App() {
             }
         }).then(resp => resp.json()).then(data => setTracks(data.data));
     }, [])
+
+    useEffect(() => {
+        if (!selectedTrackId) {
+            return;
+        }
+        fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${selectedTrackId}`, {
+            headers: {
+                'api-key': API_KEY
+            }
+        }).then(resp => resp.json()).then(json => setSelectedTrack(json.data));
+    }, [selectedTrackId])
 
 
     if (tracks === null) {
@@ -54,11 +65,6 @@ function App() {
 
                             <div onClick={ () => {
                                 setSelectedTrackId(track.id);
-                                fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${track.id}`, {
-                                    headers: {
-                                        'api-key': API_KEY
-                                    }
-                                }).then(resp => resp.json()).then(json => setSelectedTrack(json.data));
                             }}>
                                 {track.attributes.title}
                             </div>
