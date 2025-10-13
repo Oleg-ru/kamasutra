@@ -1,13 +1,13 @@
 .task-self-container {
   border: 5px solid darkmagenta;
   border-radius: 6px;
-  width: 100%;
   padding: 1rem;
   margin: 5px;
 }
 
 .main-container-tasks {
   width: 20vw;
+  min-width: 18rem;
   display: flex;
   flex-direction: column;
 }
@@ -54,4 +54,16 @@
 .reset-btn:hover {
   background-color: white;
   color: rgba(220, 20, 60, 0.6);
+}
+
+.main-container {
+  display: flex;
+  gap: 5rem;
+}
+
+.main-container-task-details{
+  border: 5px solid #535bf2;
+  border-radius: 5px;
+  width: 40vh;
+  padding: 0.5rem;
 }
