@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 
-const API_KEY = 'NaN';
+const API_KEY = '9c7de345-9a3e-40b1-8430-d67c8dfc62cf';
 
 function App() {
 
@@ -43,7 +43,6 @@ function App() {
             <h1>Musicfun</h1>
             <span>No tracks :-(</span>
         </div>
-
     }
 
   return (
