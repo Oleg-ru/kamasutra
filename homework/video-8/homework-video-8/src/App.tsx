@@ -38,7 +38,7 @@ import {useEffect, useState} from "react";
 //         priority: 3,
 //     },
 // ]
-const KEY_API = 'none';
+const KEY_API = import.meta.env.VITE_API_KEY;
 
 function App() {
 
@@ -128,6 +128,7 @@ function App() {
                     })
                 }
             </div>
+            {/*Выбранная задача*/}
             <div className={'main-container-task-details'}>
                 <h2>👀 Task details:</h2>
                 {!selectedTaskId && 'Задача не выбрана 😢.'}
