@@ -4,7 +4,7 @@ import {TrackDetail} from "./TrackDetail.tsx";
 
 
 function App() {
-    console.log('App component 🚀')
+    console.log('Users component 🚀')
 
     const [tracks] = useState([
         {id: 1, title: 'Music 1'},

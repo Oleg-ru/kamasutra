@@ -1,0 +1,20 @@
+.user-card {
+    width: 190px;
+    height: 290px;
+    list-style: none;
+    border: 3px solid #FFF;
+    border-radius: 5px;
+    padding: 0.5rem;
+}
+
+.user-card__avatar {
+}
+
+.user-card__name {
+}
+
+.user-card__age {
+}
+
+.user-card__email {
+}

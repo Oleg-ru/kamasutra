@@ -1,0 +1,21 @@
+.product-list {
+    width: 50vw;
+    display: flex;
+    gap: 0.5rem
+}
+
+.product-item {
+    list-style: none;
+    border: 2px solid #00b378;
+    border-radius: 3px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.product-item__btn {
+    font-size: 1.1rem;
+}
+
+.product-item__in-basket {
+  background-color: #00b378;
+}
