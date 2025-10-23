@@ -1,7 +1,7 @@
 import {ProductList} from "./ProductList.tsx";
 
 export function App() {
-    console.log('🔶 App')
+    console.log('🔶 Game')
     const products = [
         { id: 1, name: "Хлеб", price: 30, category: "Выпечка" },
         { id: 2, name: "Молоко", price: 60, category: "Молочные" },
