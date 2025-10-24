@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
+import {TrackItem} from "./TrackItem.tsx";
 
-export function TrackList() {
+export function TrackList({onTrackSelect, selectedTrackId}) {
     const [tracks, setTracks] = useState(null);
-    const [selectedTrackId, setSelectedTrackId] = useState(null);
-
 
     useEffect(() => {
         console.log('effect has bean');
@@ -26,23 +25,33 @@ export function TrackList() {
         </div>
     }
 
-    return (
-        <ul>
-            {
-                tracks.map((track) => {
-                    return (
-                        <li key={track.id} style={ selectedTrackId == track.id ? {border: 'solid 1px gold'} : {}}>
+    const handleResetClick = () => {
+        onTrackSelect?.(null);
+    }
 
-                            <div onClick={ () => {
-                                setSelectedTrackId(track.id);
-                            }}>
-                                {track.attributes.title}
-                            </div>
-                            <audio controls src={track.attributes.attachments[0].url}></audio>
-                        </li>
-                    )
-                })
-            }
-        </ul>
+    const handleClick = (trackId) => {
+        onTrackSelect?.(trackId);
+    }
+
+    return (
+        <div>
+            <button onClick={handleResetClick}>reset</button>
+            <hr/>
+            <ul>
+                {
+                    tracks.map((track) => {
+                                                return (
+                            <TrackItem
+                                key={track.id}
+                                track={track}
+                                isSelected={track.id === selectedTrackId}
+                                onSelect={handleClick}
+                            />
+                        )
+                    })
+                }
+            </ul>
+        </div>
     )
 }
+
