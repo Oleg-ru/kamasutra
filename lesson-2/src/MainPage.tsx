@@ -1,14 +1,14 @@
-import {TrackList} from "./TrackList.tsx";
-import {TrackDetail} from "./TrackDetail.tsx";
+import {TrackList} from "./components/TrackList.tsx";
+import {TrackDetail} from "./components/TrackDetail.tsx";
 import {useState} from "react";
 
 export function MainPage() {
 
 
 
-    const [trackId, setTrackId] = useState(null);
+    const [trackId, setTrackId] = useState<string | null>(null);
 
-    const handleTrackSelect = (id) => {setTrackId(id)}
+    const handleTrackSelect = (id: string | null): void => {setTrackId(id)}
 
     return (
         <div>
@@ -16,7 +16,6 @@ export function MainPage() {
                 <TrackList
                     selectedTrackId={trackId}
                     onTrackSelect={handleTrackSelect}
-
                 />
                 <TrackDetail trackId={trackId}/>
             </div>
