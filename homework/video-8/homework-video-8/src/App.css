@@ -56,6 +56,11 @@
   color: rgba(220, 20, 60, 0.6);
 }
 
+.app-container {
+  display: flex;
+  gap: 30px;
+}
+
 .main-container {
   display: flex;
   gap: 5rem;
@@ -64,6 +69,6 @@
 .main-container-task-details{
   border: 5px solid #535bf2;
   border-radius: 5px;
-  width: 40vh;
+  width: 40vw;
   padding: 0.5rem;
 }

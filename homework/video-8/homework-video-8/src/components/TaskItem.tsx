@@ -1,0 +1,43 @@
+function getPriorityClass(priority: number) {
+    switch (priority) {
+        case 0:
+            return 'low-priority';
+        case 1:
+            return 'medium-priority';
+        case 2:
+            return 'high-priority';
+        case 3:
+            return 'urgent-priority';
+        case 4:
+            return 'highest-priority';
+        default:
+            return '';
+    }
+}
+
+function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}) {
+
+    const classTitle = `task-title ${task.isDone ? 'line-through' : ''}`;
+    const backgroundTask =
+        `task-self-container ${getPriorityClass(task.attributes.priority)} ${selectedTaskId === task.id ? 'border-blue' : ''}`;
+
+    function handleSelectedTask() {
+        setSelectedTaskId(task.id);
+        setBoardId(task.attributes.boardId)
+    }
+
+    return (
+        <div key={task.id} className={backgroundTask} onClick={handleSelectedTask}>
+            <span className='task-main-title'>Заголовок:</span>
+            <span className={classTitle}>{task.attributes.title}</span>
+            <br/>
+            <span className='task-status'>Статус: </span>
+            <input type="checkbox" checked={task?.isDone}/>
+            <br/>
+            <span className='task-title-date'>Дата создания задачи: </span>
+            <span className='task-start-date'>{task.attributes.addedAt}</span>
+        </div>
+    );
+}
+
+export default TaskItem;
