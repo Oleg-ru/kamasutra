@@ -4,8 +4,8 @@ import {TaskDetails} from "./components/TaskDetails.tsx";
 import {useState} from "react";
 
 function MainPage() {
-    const [selectedTaskId, setSelectedTaskId] = useState(null);
-    const [boardId, setBoardId] = useState(null);
+    const [selectedTaskId, setSelectedTaskId] = useState<string | null>(null);
+    const [boardId, setBoardId] = useState<string | null>(null);
 
     return (
         <>
@@ -13,7 +13,6 @@ function MainPage() {
                 <TasksList
                     selectedTaskId={selectedTaskId}
                     setSelectedTaskId={setSelectedTaskId}
-                    boardId={boardId}
                     setBoardId={setBoardId}
                 />
                 <TaskDetails

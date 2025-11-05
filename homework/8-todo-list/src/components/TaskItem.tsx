@@ -1,3 +1,23 @@
+type Props = {
+    task: Task
+    selectedTaskId: string | null
+    setSelectedTaskId: (id: string | null) => void
+    setBoardId: (id: string | null) => void
+}
+
+export type Task = {
+    id: string
+    type: string
+    attributes: {
+        title: string
+        boardId: string
+        status: number
+        priority: number
+        addedAt: string
+        attachmentsCount: number
+    }
+}
+
 function getPriorityClass(priority: number) {
     switch (priority) {
         case 0:
@@ -15,9 +35,10 @@ function getPriorityClass(priority: number) {
     }
 }
 
-function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}) {
+function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}: Props) {
 
-    const classTitle = `task-title ${task.isDone ? 'line-through' : ''}`;
+    //const classTitle = `task-title ${task.isDone ? 'line-through' : ''}`;
+    const classTitle = '';
     const backgroundTask =
         `task-self-container ${getPriorityClass(task.attributes.priority)} ${selectedTaskId === task.id ? 'border-blue' : ''}`;
 
@@ -32,7 +53,7 @@ function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}) {
             <span className={classTitle}>{task.attributes.title}</span>
             <br/>
             <span className='task-status'>Статус: </span>
-            <input type="checkbox" checked={task?.isDone}/>
+            <input type="checkbox" checked={false}/>
             <br/>
             <span className='task-title-date'>Дата создания задачи: </span>
             <span className='task-start-date'>{task.attributes.addedAt}</span>

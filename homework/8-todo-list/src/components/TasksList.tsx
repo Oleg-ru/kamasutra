@@ -1,11 +1,17 @@
 import './TaskList.css'
 import {useEffect, useState} from "react";
-import TaskItem from "./TaskItem.tsx";
+import TaskItem, {type Task} from "./TaskItem.tsx";
 
-export function TasksList({setSelectedTaskId, selectedTaskId, setBoardId}) {
+type Props = {
+    setSelectedTaskId: (id: string | null) => void;
+    selectedTaskId: string | null;
+    setBoardId: (id: string | null) => void;
+}
+
+export function TasksList({setSelectedTaskId, selectedTaskId, setBoardId}: Props) {
     const KEY_API = import.meta.env.VITE_API_KEY;
 
-    const [tasks, setTasks] = useState(null);
+    const [tasks, setTasks] = useState<Array<Task> | null>(null);
 
     useEffect(() => {
         fetch('https://trelly.it-incubator.app/api/1.0/boards/tasks', {
@@ -32,7 +38,7 @@ export function TasksList({setSelectedTaskId, selectedTaskId, setBoardId}) {
             <div className='main-container-tasks'>
                 <button className='reset-btn' onClick={handleReset}>Сбросить выделение</button>
                 {
-                    tasks.map(task => {
+                    tasks.map((task: Task) => {
                         return <TaskItem
                             key={task.id}
                             task={task}
