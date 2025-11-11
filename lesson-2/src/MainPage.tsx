@@ -1,5 +1,5 @@
-import {TrackList} from "./components/TrackList.tsx";
-import {TrackDetail} from "./components/TrackDetail.tsx";
+import {TrackList} from "./ui/TrackList.tsx";
+import {TrackDetail} from "./ui/TrackDetail.tsx";
 import {useState} from "react";
 
 export function MainPage() {
