@@ -1,6 +1,7 @@
 import './TaskList.css'
 import {useEffect, useState} from "react";
-import TaskItem, {type Task} from "./TaskItem.tsx";
+import {getTasks, type Task} from "../dal/api.ts";
+import TaskItem from "./TaskItem.tsx";
 
 type Props = {
     setSelectedTaskId: (id: string | null) => void;
@@ -9,18 +10,11 @@ type Props = {
 }
 
 export function TasksList({setSelectedTaskId, selectedTaskId, setBoardId}: Props) {
-    const KEY_API = import.meta.env.VITE_API_KEY;
 
     const [tasks, setTasks] = useState<Array<Task> | null>(null);
 
     useEffect(() => {
-        fetch('https://trelly.it-incubator.app/api/1.0/boards/tasks', {
-            headers: {
-                'api-key': KEY_API
-            }
-        })
-            .then(resp => resp.json())
-            .then(data => setTasks(data.data));
+        getTasks().then(data => setTasks(data.data));
     }, []);
 
     if (tasks === null) {

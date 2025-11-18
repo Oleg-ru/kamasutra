@@ -1,21 +1,10 @@
+import type {Task} from "../dal/api.ts";
+
 type Props = {
     task: Task
     selectedTaskId: string | null
     setSelectedTaskId: (id: string | null) => void
     setBoardId: (id: string | null) => void
-}
-
-export type Task = {
-    id: string
-    type: string
-    attributes: {
-        title: string
-        boardId: string
-        status: number
-        priority: number
-        addedAt: string
-        attachmentsCount: number
-    }
 }
 
 function getPriorityClass(priority: number) {

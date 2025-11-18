@@ -1,31 +1,14 @@
 import {useEffect, useState} from "react";
+import {getTask} from "../dal/api.ts";
+import {type TaskDetails} from "../dal/api.ts";
 
 type Props = {
     selectedTaskId: string | null;
     boardId: string | null;
 }
 
-type TaskDetails = {
-    id: string
-    type: string
-    attributes: {
-        title: string | null
-        order: number
-        deadline: string | null
-        startDate: string | null
-        addedAt: string
-        priority: number
-        status: number
-        updatedAt: string
-        boardId: string
-        boardTitle: string
-        description: string | null
-        attachments: Array<string>
-    }
-}
-
 export function TaskDetails({selectedTaskId, boardId}: Props) {
-    const KEY_API = import.meta.env.VITE_API_KEY;
+
     const [selectedTask, setSelectedTask] = useState<TaskDetails | null>(null);
 
     useEffect(() => {
@@ -33,12 +16,7 @@ export function TaskDetails({selectedTaskId, boardId}: Props) {
             return;
         }
 
-        fetch(`https://trelly.it-incubator.app/api/1.0/boards/${boardId}/tasks/${selectedTaskId}`, {
-            headers: {
-                'api-key': KEY_API
-            }
-        }).then(resp => resp.json())
-            .then(data => setSelectedTask(data.data));
+        getTask(boardId, selectedTaskId).then(json => setSelectedTask(json.data));
     }, [selectedTaskId]);
 
 
