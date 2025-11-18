@@ -1,7 +1,7 @@
 import './TaskList.css'
-import {useEffect, useState} from "react";
-import {getTasks, type Task} from "../dal/api.ts";
+import { type Task} from "../dal/api.ts";
 import TaskItem from "./TaskItem.tsx";
+import {useTasks} from "../bll/useTasks.ts";
 
 type Props = {
     setSelectedTaskId: (id: string | null) => void;
@@ -11,11 +11,7 @@ type Props = {
 
 export function TasksList({setSelectedTaskId, selectedTaskId, setBoardId}: Props) {
 
-    const [tasks, setTasks] = useState<Array<Task> | null>(null);
-
-    useEffect(() => {
-        getTasks().then(data => setTasks(data.data));
-    }, []);
+    const { tasks } = useTasks();
 
     if (tasks === null) {
         return <h2>Загрузка...📡</h2>

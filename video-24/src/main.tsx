@@ -1,10 +1,10 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import {StrictMode} from 'react'
+import {createRoot} from 'react-dom/client'
 import './index.css'
-import { CounterForChildren} from "./ui/Counter.tsx";
+import {CounterPage} from "./ui/CounterPage.tsx";
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <CounterForChildren />
-  </StrictMode>,
+    <StrictMode>
+       <CounterPage />
+    </StrictMode>,
 )
