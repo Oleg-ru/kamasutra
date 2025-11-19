@@ -1,0 +1,9 @@
+.track{
+    border: 1px solid #00b378;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.track h2 {
+    color: #747bff;
+}
