@@ -2,6 +2,7 @@ import "./App.css"
 import {TasksList} from "./ui/TasksList.tsx";
 import {TaskDetails} from "./ui/TaskDetails.tsx";
 import {useTaskSelection} from "./bll/useTaskSelection.ts";
+import styles from './MainPage.module.css'
 
 function MainPage() {
 
@@ -9,7 +10,7 @@ function MainPage() {
 
     return (
         <>
-            <div className="app-container">
+            <div className={styles.container}>
                 <TasksList
                     selectedTaskId={selectedTaskId}
                     setSelectedTaskId={setSelectedTaskId}

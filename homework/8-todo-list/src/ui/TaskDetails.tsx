@@ -1,4 +1,5 @@
 import {useTaskDetails} from "../bll/useTaskDetails.ts";
+import styles from "./TaskDetails.module.css"
 
 type Props = {
     selectedTaskId: string | null;
@@ -10,7 +11,7 @@ export function TaskDetails({selectedTaskId, boardId}: Props) {
     const {taskDetails} = useTaskDetails(selectedTaskId, boardId);
 
     return (
-        <div className={'main-container-task-details'}>
+        <div className={styles.container}>
             <h2>👀 Task details:</h2>
             {!selectedTaskId && 'Задача не выбрана 😢.'}
             {selectedTaskId && taskDetails?.id !== selectedTaskId && <div>Загрузка задачи 🎲</div>}

@@ -1,0 +1,6 @@
+.container {
+    border: 5px solid #535bf2;
+    border-radius: 5px;
+    width: 40vw;
+    padding: 0.5rem;
+}

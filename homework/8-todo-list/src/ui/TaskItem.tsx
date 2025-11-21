@@ -1,4 +1,6 @@
 import type {Task} from "../dal/api.ts";
+import clsx from "clsx";
+import styles from "./TaskItem.module.css"
 
 type Props = {
     task: Task
@@ -26,10 +28,20 @@ function getPriorityClass(priority: number) {
 
 function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}: Props) {
 
-    //const classTitle = `task-title ${task.isDone ? 'line-through' : ''}`;
-    const classTitle = '';
-    const backgroundTask =
-        `task-self-container ${getPriorityClass(task.attributes.priority)} ${selectedTaskId === task.id ? 'border-blue' : ''}`;
+
+    // const backgroundTask =
+    //     `task-self-container ${getPriorityClass(task.attributes.priority)} ${selectedTaskId === task.id ? 'border-blue' : ''}`;
+
+
+    console.log('Available styles:', styles);
+    console.log('taskSelfContainer:', styles.taskSelfContainer);
+    console.log('borderBlue:', styles.borderBlue);
+
+    const backgroundTask = clsx({
+        [styles.container]: true,
+        [getPriorityClass(task.attributes.priority)]: true,
+        [styles.border]: selectedTaskId === task.id
+    });
 
     function handleSelectedTask() {
         setSelectedTaskId(task.id);
@@ -39,7 +51,7 @@ function TaskItem({task, selectedTaskId, setSelectedTaskId, setBoardId}: Props) 
     return (
         <div key={task.id} className={backgroundTask} onClick={handleSelectedTask}>
             <span className='task-main-title'>Заголовок:</span>
-            <span className={classTitle}>{task.attributes.title}</span>
+            <span>{task.attributes.title}</span>
             <br/>
             <span className='task-status'>Статус: </span>
             <input type="checkbox" checked={false}/>

@@ -1,0 +1,31 @@
+.container {
+    border: 5px solid darkmagenta;
+    border-radius: 6px;
+    padding: 1rem;
+    margin: 5px;
+}
+
+.border {
+    border: 5px solid blue;
+}
+
+.task-main-title, .task-status, .task-title-date {
+    font-weight: bold;
+    margin-right: 3px;
+}
+
+.low-priority {
+    background-color: #ffffff;
+}
+.medium-priority {
+    background-color: #ffd7b5;
+}
+.high-priority {
+    background-color: #ffb38a;
+}
+.urgent-priority {
+    background-color: #ff9248;
+}
+.highest-priority {
+    background-color: #ff6700;
+}
