@@ -1,7 +1,5 @@
 import {TaskDetails} from "../ui/TaskDetails.tsx";
 
-const KEY_API = import.meta.env.VITE_API_KEY;
-
 export type Task = {
     id: string
     type: string
@@ -42,12 +40,19 @@ type TaskDetailsOutput = {
     data: TaskDetails
 }
 
+function getApiKey() {
+    const key = import.meta.env.VITE_API_KEY;
+    if (key) {
+        return {
+            'api-key': key
+        }
+    }
+    return undefined;
+}
 
 export const getTask = (boardId: string | null, selectedTaskId: string)=>  {
     const promise: Promise<TaskDetailsOutput> = fetch(`https://trelly.it-incubator.app/api/1.0/boards/${boardId}/tasks/${selectedTaskId}`, {
-        headers: {
-            'api-key': KEY_API
-        }
+        headers: getApiKey()
     }).then(resp => resp.json());
 
     return promise;
@@ -55,9 +60,7 @@ export const getTask = (boardId: string | null, selectedTaskId: string)=>  {
 
 export const getTasks = () => {
     const promise: Promise<TaskOutput> = fetch('https://trelly.it-incubator.app/api/1.0/boards/tasks', {
-        headers: {
-            'api-key': KEY_API
-        }
+        headers: getApiKey()
     })
         .then(resp => resp.json());
 

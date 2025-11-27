@@ -128,6 +128,7 @@ const tasks = [
 ]
 
 
+// @ts-ignore
 export const getTask = (boardId: string | null, selectedTaskId: string)=>  {
     const promise: Promise<TaskDetailsOutput> = Promise.resolve(task);
 
