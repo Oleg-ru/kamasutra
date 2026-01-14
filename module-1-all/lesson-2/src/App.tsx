@@ -15,15 +15,27 @@ type Track = {
     attributes: TrackAttributes
 }
 
+type TrackDetailsAttributes = {
+    title: string,
+    lyrics: string,
+    attachments: Attachment[]
+}
+
+type TrackDetailsResource = {
+    id: string,
+    attributes: TrackDetailsAttributes
+}
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 
 export function App() {
 
     const [tracks, setTracks] = useState <Track[] | null>(null);
     const [selectedTrackId, setSelectedTrackId] = useState <string | null>(null);
+    const [selectedTrack, setSelectedTrack] = useState <TrackDetailsResource | null>(null);
 
     useEffect(() => {
-        fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks', {
+        fetch('https://musicfun.it-incubator.app/api/1.0/playlists/tracks?pageSize=5', {
             headers: {
                 'api-key': API_KEY
             }
@@ -33,6 +45,20 @@ export function App() {
                 setTracks(json.data)
             })
     }, []);
+
+    const handleSelectTrack = (trackId: string) => {
+        setSelectedTrackId(trackId);
+
+        fetch(`https://musicfun.it-incubator.app/api/1.0/playlists/tracks/${trackId}`, {
+            headers: {
+                'api-key': API_KEY
+            }
+        })
+            .then(response => response.json())
+            .then(json => {
+                setSelectedTrack(json.data)
+            })
+    };
 
     return (
         <>
@@ -47,14 +73,24 @@ export function App() {
                         style.borderRadius = '10px'
                     }
 
+                    const handleClick = () => {
+                        handleSelectTrack(track.id);
+                    };
+
                     return <li key={track.id} style={style}>
-                        <div onClick={() => {
-                            setSelectedTrackId(track.id)
-                        }}>{track.attributes.title}</div>
+                        <div onClick={handleClick}>{track.attributes.title}</div>
                         <audio controls src={track.attributes.attachments[0].url}></audio>
                     </li>
                 })}
             </ul>
+            <hr/>
+            <h2>Track Details:</h2>
+            {!selectedTrackId && <div>Not selected track</div>}
+            {selectedTrackId && selectedTrack && selectedTrack.id !== selectedTrackId && <div>Loading...</div>}
+            {selectedTrack && selectedTrack.id === selectedTrackId && <div>
+                <h4>{selectedTrack.attributes.title}</h4>
+                <p>{selectedTrack.attributes.lyrics}</p>
+            </div>}
         </>
     )
 }
