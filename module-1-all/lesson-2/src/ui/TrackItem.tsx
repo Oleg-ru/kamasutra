@@ -1,5 +1,7 @@
-import React, {type CSSProperties} from "react";
+import React from "react";
 import type {Track} from "../dal/types.ts";
+import styles from './TrackItem.module.css'
+import clsx from "clsx";
 
 type TrackItemProps = {
     track: Track,
@@ -9,18 +11,19 @@ type TrackItemProps = {
 
 export function TrackItem(props: TrackItemProps) {
 
-    const style: CSSProperties = {};
-    if (props.isSelected) {
-        style.border = '1px solid green';
-        style.borderRadius = '10px'
-    }
+    const classNames = clsx(
+        {
+            [styles.track]: true,
+            [styles.selected]: props.isSelected
+        }
+    );
 
     const handleClick = () => {
         props.onTrackSelect(props.track.id);
     };
 
     return (
-        <li style={style}>
+        <li className={classNames}>
             <div onClick={handleClick}>{props.track.attributes.title}</div>
             <audio controls src={props.track.attributes.attachments[0].url}></audio>
         </li>
